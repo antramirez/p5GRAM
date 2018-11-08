@@ -13,28 +13,11 @@ This project will consist of an interactive web drawing app, in which users will
 * user will have an account (username, password, etc.) and a list of sketches
 * sketch will have a name, caption, source url, and a date created
 
-User Schema {
-  username: {type: String},
-  password: {type: encrypted String},
-  firstName: {type: String},
-  lastName: {type: String},
-  sketches [SketchSchema]:
-}     
-
-Sketch Schema:
-SketchSchema {
-   name: {type: String},
-   caption: {type: String},
-   tags: {type: String}, // string will contain multiple strings, separated by space
-   url: {type: String},  // this is where the image is stored on the server
-   dateCreated: {type: Date}
-}
-
 Example user:
 ```javascript
 {
   firstName: "anthony",
-  firstName: "ramirez",
+  lastName: "ramirez",
   username: "antramirez",
   passwordHash: // a password hash,
   sketches: // an array of references to sketches
