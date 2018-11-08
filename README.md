@@ -53,7 +53,7 @@ Example sketch:
 ````
 
 
-## [Link to Commented First Draft Schema](db.js)
+## [Link to Commented First Draft Schema](src/db.js)
 
 
 ## Wireframe
@@ -68,11 +68,11 @@ Example sketch:
 * /create - create a p5 sketch
 ![create](documentation/create.png)
 * /settings - manage user preferences
-![create](documentation/create.png)
+![create](documentation/settings.png)
 
 
 ## Site map
-[sitemap](documentation/sitemap.png)
+![sitemap](documentation/sitemap.png)
 
 ## User Stories or Use Cases
 1. As a non-registered user, I can sign up / register
@@ -94,7 +94,7 @@ Example sketch:
   * Sass/SCSS - this is essentially a more efficient way of making styles. Sass can also be used with GULP to compile Sass files to CSS. Sass allows for nesting (i.e. easier to write styles for elements within elements). Additionally, Sass allows for variables while styling, so repetitive styles can be simplified using variables. This is worth 2 points.
 
 
-## [Link to Initial Main Project File](app.js)
+## [Link to Initial Main Project File](src/app.js)
 
 
 ## Annotations/References used
