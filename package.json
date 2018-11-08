@@ -1,0 +1,24 @@
+{
+  "name": "final-project",
+  "version": "1.0.0",
+  "description": "final project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nyu-csci-ua-0480-001-003-fall-2018/antramirez-final-project.git"
+  },
+  "author": "Anthony Ramirez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nyu-csci-ua-0480-001-003-fall-2018/antramirez-final-project/issues"
+  },
+  "homepage": "https://github.com/nyu-csci-ua-0480-001-003-fall-2018/antramirez-final-project#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "hbs": "^4.0.1",
+    "mongoose": "^5.3.10"
+  }
+}
