@@ -8,7 +8,7 @@ Final Project
 This project will consist of an interactive web drawing app, in which users will be able to create sketches using p5.js and share them in a manner similar to Instagram. The p5 canvas will contain several drawing options for the users, and when they are content, they can add a caption and tags, and then upload their photo to their personal page. A user can also search for other users and see their sketches, but first the user must register and login. This project will also use express and mongoose to serve the various web pages and store user/sketch information, respectively.   
 
 
-## Data Model:
+## Updated Data Model:
 
 * user will have an account (username, password, etc.) and a list of sketches
 * sketch will have a name, caption, source url, and a date created
@@ -19,8 +19,7 @@ Example user:
   firstName: "anthony",
   lastName: "ramirez",
   username: "antramirez",
-  passwordHash: // a password hash,
-  sketches: // an array of references to sketches
+  password: // a password hash,
 }
 ```
 
@@ -31,12 +30,12 @@ Example sketch:
   caption: "check out my awesome sketch!",
   tags: "p5 webArt cool",
   url: "www.mysite.com/img/username/1.jpg",
-  dateCreated: "Wed Nov 07 2018 22:01:19 GMT-0500"  
+  userID: // ObjectId of user
 }
 ````
 
 
-## [Link to Commented First Draft Schema](src/db.js)
+## [Link to Commented Second Draft Schema](src/db.js)
 
 
 ## Wireframe
