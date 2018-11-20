@@ -2,9 +2,17 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/styles.css">
     <title>p5Gram</title>
   </head>
   <body>
+    <h1>p5Gram</h1>
+    {{#if user}}
+    <p>Welcome, {{user.username}}</p>
+    {{/if}}
+    <a href="/register">Register</a>
+    <a href="/login">Login</a>
+    <a href="/settings">Manage account</a>
     {{{body}}}
   </body>
 </html>

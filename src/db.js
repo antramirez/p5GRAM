@@ -6,9 +6,8 @@ const mongoose = require('mongoose');
 const userSchema = mongoose.Schema({
   firstName: {type: String, required: true},
   lastName: {type: String, required: true},
-  userName: {type: String, required: true},
-  password: {type: String, required: true}, // hashed
-  sketches: [SketchSchema] // array of sketches
+  username: {type: String, unique: true, required: true},
+  password: {type: String, required: true}
 });
 
 // sketch scheme
@@ -16,7 +15,8 @@ const sketchSchema = mongoose.Schema({
   name: {type: String, required: true},
   caption: {type: String},
   tags: {type: String},
-  dateCreated: {type: Date}
+  dateCreated: {type: Date},
+  userId: {type: mongoose.Schema.Types.ObjectId, required: true, ref: 'userSchema'}
 });
 
 

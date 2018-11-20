@@ -1,3 +1,4 @@
 body {
-  background: rgba(0,0,255, .15);
-}
+  background-color: aliceblue; }
+  body h1 {
+    font-family: sans-serif; }
