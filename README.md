@@ -40,8 +40,10 @@ Example sketch:
 
 
 ## Wireframe
-* / - register
-![home](documentation/home.png)
+* / - home
+![register](documentation/home.jpg)
+* /register - register
+![register](documentation/register.png)
 * /login - login
 ![login](documentation/login.png)
 * /usr/sketches - display images corresponding to user
