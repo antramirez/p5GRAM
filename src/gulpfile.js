@@ -3,9 +3,9 @@ const sass = require('gulp-sass');
 
 // compile sass into css
 gulp.task('sass', function() {
-  return gulp.src('./sass/*.scss')  // source is sass directory
-        .pipe(sass()) //
-        .pipe(gulp.dest('./public/css'));  // destination is public css directory
+  return gulp.src('./sass/*.scss')  // source is any scss file in sass directory
+        .pipe(sass()) // run sass function to convert scss to css
+        .pipe(gulp.dest('./public/css'));  // destination is public css directory (if file exists, it updates it; else, it creates new css file named after .scss file)
 });
 
 // look for any changes in scss file, and apply it to css file

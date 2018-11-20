@@ -7,6 +7,17 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 
 function register(firstName, lastName, username, password, errorCallback, successCallback) {
+  // validate first and last name
+  if (firstName.length < 1) {
+    const errObj = {message: 'FIRST NAME TOO SHORT'};
+    console.log(errObj.message);
+    errorCallback(errObj);
+  }
+  if (lastName.length < 1) {
+    const errObj = {message: 'LAST NAME TOO SHORT'};
+    console.log(errObj.message);
+    errorCallback(errObj);
+  }
   // check if username and password are both length of at least 8
   if (username.length < 8 || password.length < 8) {
     // create error object to log message and create parameter for error call back
@@ -106,12 +117,12 @@ function updateUser(firstName, lastName, username, errorCallback, successCallbac
     console.log(errObj.message);
     errorCallback(errObj);
   }
-  else if (lastName.length < 1) {
+  if (lastName.length < 1) {
     const errObj = {message: 'LAST NAME TOO SHORT'};
     console.log(errObj.message);
     errorCallback(errObj);
   }
-  else if (username.length < 8) {
+  if (username.length < 8) {
     const errObj = {message: 'USERNAME TOO SHORT'};
     console.log(errObj.message);
     errorCallback(errObj);
