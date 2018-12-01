@@ -15,7 +15,8 @@ const sketchSchema = mongoose.Schema({
   name: {type: String, required: true},
   caption: {type: String},
   tags: {type: String},
-  dateCreated: {type: Date},
+  src: {type: String},
+  // dateCreated: {type: Date},
   userId: {type: mongoose.Schema.Types.ObjectId, required: true, ref: 'userSchema'}
 });
 

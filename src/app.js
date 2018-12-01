@@ -9,7 +9,6 @@ require('./db');
 // require session module
 const session = require('express-session');
 
-
 const path = require('path');
 const auth = require('./auth.js');
 
@@ -20,7 +19,9 @@ const fs = require('fs');
 
 const app = express();
 
+// register schemas
 const User = mongoose.model('User');
+const Sketch = mongoose.model('Sketch');
 
 // set session options middleware
 app.use(session({secret: 'secret message', saveUninitialized: false, resave: false}));
@@ -93,26 +94,53 @@ app.post('/login', (req, res) => {
     auth.startAuthenticatedSession(req, user, () => {
       // set session user to logged in user
       req.session.user = user;
-      res.redirect('/');
+      // redirect to user's sketches
+      res.redirect('/'+ user.username +'/sketches');
     });
   });
 })
 
 app.get('/:username/sketches', (req, res) => {
-  const path = req.params.username + '/sketches'
-  res.render(path);
+  // see if username exists
+  User.findOne({username: req.params.username}, (err, user, count) => {
+    if (user) {
+      // now see if user has any sketches
+      Sketch.find({userId: user._id}, (err, sketches, count) => {
+          res.render('user-single', {username: req.params.username, sketches: sketches.reverse()});
+      });
+    }
+    // print message is user does not exist
+    else {
+      res.render('user-single', {message: "USER DOES NOT EXIST"});
+    }
+  });
 });
 
 app.get('/add', (req, res) => {
-  res.render('add');
+  if (!req.session.user) {
+    res.redirect('/login');
+  }
+  else {
+    res.render('add');
+  }
 });
 
 app.get('/create', (req, res) => {
-  res.render('create');
+  if (!req.session.user) {
+    res.redirect('/login');
+  }
+  else {
+    res.render('create');
+  }
 });
 
 app.get('/settings', (req, res) => {
-  res.render('settings');
+  if (!req.session.user) {
+    res.redirect('/login');
+  }
+  else {
+    res.render('settings');
+  }
 });
 
 app.post('/settings', (req, res) => {
@@ -172,10 +200,29 @@ app.post("/add", upload.single("file"), (req, res) => {
       fs.rename(tempPath, targetPath, err => {
         // print error message if something goes wrong, or else take user to homepage
         if (err) {
-          res.render('/', {message: "SOMETHING WENT WRONG"});
+          res.render('/add', {message: "SOMETHING WENT WRONG"});
         }
         else {
-          res.redirect('/');
+          // extract tags
+          const tags = req.body.tags.split(' ');
+
+          // create a new sketch using forms' fields
+          new Sketch({
+            name: req.body.name,
+            caption: req.body.caption,
+            tags: tags,
+            name: req.body.name,
+            src: '/img/uploads/' + req.session.user.username + '/' + newFileName + extension,
+            userId: res.locals.user._id
+          }).save(function(err, result, count) {
+            // if error saving sketch, create error object to log message
+            if (err) {
+              // console.log('err');
+              app.render('/add', {message: "COULD NOT SAVE SKETCH"})
+            }
+          });
+          // redirect user to their page with the new image
+          res.redirect('/'+ res.locals.user.username +'/sketches');
         }
       });
     }

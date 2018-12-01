@@ -5,3 +5,14 @@ body {
     font-family: sans-serif;
   }
 }
+
+.image-container {
+  width: 200px;
+  margin-bottom: 50px;
+  h2 {
+    margin-top: 5px;
+  }
+  img {
+    width: 100%;
+  }
+}

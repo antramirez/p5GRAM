@@ -1,0 +1,25 @@
+{{#if message}}
+  <h1>{{ message }}</h1>
+{{else}}
+{{#if sketches}}
+  <h1>{{ username }} Sketches</h1>
+    <div class="images">
+        {{#each sketches as |s|}}
+          <div class="image-container">
+            <img src="{{s.src}}" alt="">
+            <h2>{{s.name}}</h2>
+            {{#if s.caption}}
+              <p class="caption">{{s.caption}}</p>
+            {{/if}}
+            {{#if s.tags}}
+              <p class="tags">
+                Tags: {{s.tags}}
+              </p>
+            {{/if}}
+          </div>
+        {{/each}}
+    </div>
+  {{else}}
+    <h1> {{ username }} currently has no sketches.</h1>
+  {{/if}}
+{{/if}}

@@ -2,6 +2,9 @@
   <div class="error">{{ message }}</div>
 {{/if}}
 <form method="post" enctype="multipart/form-data" action="/add">
-    <input type="file" name="file" required>
+    Image: <input type="file" name="file" required><br>
+    Title: <input type="text" name="name" value="" required><br>
+    Caption: <input type="textarea" name="caption" value=""><br>
+    Tags: <input type="text" name="tags" placeholder="Separate tags by space"><br>
     <input type="submit" value="Submit">
 </form>
