@@ -13,11 +13,14 @@ const session = require('express-session');
 const path = require('path');
 const auth = require('./auth.js');
 
+// require modules to upload files and alter the file system
+const multer = require('multer');
+const mkdirp = require('mkdirp');
+const fs = require('fs');
 
 const app = express();
 
 const User = mongoose.model('User');
-
 
 // set session options middleware
 app.use(session({secret: 'secret message', saveUninitialized: false, resave: false}));
@@ -26,6 +29,11 @@ app.set('view engine', 'hbs');
 
 // full path relative to public
 const fullPath = path.join(__dirname, 'public');
+
+// set temporary directory to store images when they are uploaded
+const upload = multer({
+  dest: fullPath + '/img/tmp'
+});
 
 // set middleware to serve static content relative to public directory
 app.use(express.static(fullPath));
@@ -61,6 +69,8 @@ app.post('/register', (req, res) => {
     auth.startAuthenticatedSession(req, user, () => {
       // set session user to user who just registered and redirect to home
       req.session.user = user;
+      // create a directory for the user's uploads
+      mkdirp(fullPath + '/img/uploads/' + req.session.user.username);
       res.redirect('/');
     });
   });
@@ -106,6 +116,9 @@ app.get('/settings', (req, res) => {
 });
 
 app.post('/settings', (req, res) => {
+  // store original username to be used to compare with updated username
+  const oldUsername = req.session.user.username;
+
   // call update function
   auth.updateUser(req.body.firstName, req.body.lastName, req.body.username,
   (errObj) => {
@@ -127,7 +140,58 @@ app.post('/settings', (req, res) => {
       res.redirect('/');
     });
   });
+
+  // rename diretory that contains the user's images
+  if (oldUsername !== req.body.username) {
+    fs.rename(fullPath + '/img/uploads/' + oldUsername, fullPath + '/img/uploads/' + req.body.username, (err) => {
+      if (err) {
+        res.render('settings', {message: "SOMETHING WENT WRONG"})
+      }
+    });
+  }
 });
+
+// handler for when user uploads image
+app.post("/add", upload.single("file"), (req, res) => {
+
+    // get extension of image uploaded
+    const extension = path.extname(req.file.originalname).toLowerCase();
+
+    // get file's temporary path where it was uploaded to
+    const tempPath = req.file.path;
+    const tempPathArr = tempPath.split('/');
+
+    // multer's file.path creates a unique name for files, so use that to name the image
+    const newFileName = tempPathArr[tempPathArr.length - 1];
+
+    // create desired path, consisting of username and unique file name
+    const targetPath = path.join(fullPath + '/img/uploads/' + req.session.user.username + '/' + newFileName + extension);
+
+    // make sure image is a PNG or JPG
+    if (extension === ".png" || extension === ".jpg") {
+      fs.rename(tempPath, targetPath, err => {
+        // print error message if something goes wrong, or else take user to homepage
+        if (err) {
+          res.render('/', {message: "SOMETHING WENT WRONG"});
+        }
+        else {
+          res.redirect('/');
+        }
+      });
+    }
+    // if image is not valid, remove temporary path and print error message
+    else {
+      fs.unlink(tempPath, err => {
+        if (err) {
+          res.render('add', {message: "ONLY .PNG AND .JPG FILES ARE ALLOWED"});
+        }
+        else {
+          res.render('/', {message: "SOMETHING WENT WRONG"});
+        }
+      });
+    }
+  }
+);
 
 // listen on node env PORT or port 3000
 app.listen(process.env.PORT || 3000);

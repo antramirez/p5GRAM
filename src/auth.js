@@ -128,8 +128,18 @@ function updateUser(firstName, lastName, username, errorCallback, successCallbac
     errorCallback(errObj);
   }
   else {
-    // success call back will update the user in the db
-    successCallback();
+    // check if valid username already exists
+    User.findOne({username: username}, (err, user, count) => {
+      if (!user) {
+        // success call back will update the user in the db
+        successCallback();
+      }
+      else {
+        const errObj = {message: 'USERNAME ALREADY EXISTS'};
+        console.log(errObj.message);
+        errorCallback(errObj);
+      }
+    });
   }
 }
 
