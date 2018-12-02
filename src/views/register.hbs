@@ -1,23 +1,32 @@
-<h2>Register</h2>
-{{#if message}}
-<div class="error">{{ message }}</div>
-{{/if}}
-<form method="POST" action="register">
-	<div>
-		<label for="firstName">First name:</label>
-		<input type="text" name="firstName" value="" required>
+<header>
+	<h1>p5GRAM</h1>
+</header>
+
+<div class="form-div">
+	<h2>Register</h2>
+	{{#if message}}
+	<div class="error">{{ message }}</div>
+	{{/if}}
+	<form method="POST" action="register">
+		<div>
+			<label for="firstName">First name:</label>
+			<input type="text" class="form-text" name="firstName" value="" required>
+		</div>
+		<div>
+			<label for="lastName">Last name:</label>
+			<input type="text" class="form-text" name="lastName" value="" required>
+		</div>
+		<div>
+			<label for="username">Username:</label>
+			<input type="text" class="form-text" name="username" value="" required>
+		</div>
+		<div>
+			<label for="password">Password:</label>
+			<input type="password" class="form-text" name="password" value="" required>
+		</div>
+		<div><input type="submit" class="form-submit" value="Register"></div>
+	</form>
+	<div class="align-right">
+		Already a member? Login <a href="/login">here</a>.
 	</div>
-	<div>
-		<label for="lastName">Last name:</label>
-		<input type="text" name="lastName" value="" required>
-	</div>
-	<div>
-		<label for="username">Username:</label>
-		<input type="text" name="username" value="" required>
-	</div>
-	<div>
-		<label for="password">Password:</label>
-		<input type="password" name="password" value="" required>
-	</div>
-	<div><input type="submit" value="Register"></div>
-</form>
+</div>

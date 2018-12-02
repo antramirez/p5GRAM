@@ -1,19 +1,21 @@
-<h2>Manage Your Profile</h2>
-{{#if message}}
-<div class="error">{{message}}</div>
-{{/if}}
-<form method="POST" action="settings">
-	<div>
-		<label for="firstName">First name:</label>
-		<input type="text" name="firstName" value="{{user.firstName}}">
-	</div>
-	<div>
-		<label for="lastName">Last name:</label>
-		<input type="text" name="lastName" value="{{user.lastName}}">
-	</div>
-	<div>
-		<label for="username">Username:</label>
-		<input type="text" name="username" value="{{user.username}}">
-	</div>
-	<div><input type="submit" value="Update"></div>
-</form>
+<header>
+	<h1>p5GRAM</h1>
+</header>
+
+<div class="form-div">
+	<h2>Manage Your Profile</h2>
+	{{#if message}}
+	<div class="error">{{message}}</div>
+	{{/if}}
+	<form method="POST" action="settings">
+
+			<label for="firstName">First name</label>
+			<input type="text" class="form-text" name="firstName" value="{{user.firstName}}" required>
+
+			<label for="lastName">Last name</label>
+			<input type="text" class="form-text" name="lastName" value="{{user.lastName}}" required>
+
+			<input type="submit" class="form-submit"value="Update">
+	</form>
+
+</div>

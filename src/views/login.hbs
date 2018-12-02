@@ -1,17 +1,26 @@
-<h2>Login</h2>
-{{#if message}}
-<div class="error">{{ message }}</div>
-{{/if}}
-<form method="POST" action="login">
-	<div>
-		<label for="username">Username:</label>
-		<input type="text" name="username" value="" required>
+<header>
+	<h1>p5GRAM</h1>
+</header>
+
+<div class="form-div">
+	<h2>Login</h2>
+	{{#if message}}
+	<div class="error">{{ message }}</div>
+	{{/if}}
+	<form method="POST" action="login">
+		<div>
+			<label for="username">Username</label>
+			<input type="text" class="form-text" name="username" value="" required>
+		</div>
+		<div>
+			<label for="password">Password</label>
+			<input type="password" class="form-text" name="password" value="" required>
+		</div>
+		<div>
+			<input type="submit" class="form-submit" value="Login">
+		</div>
+	</form>
+	<div class="align-right">
+		New to p5GRAM? Register <a href="/register">here</a>.
 	</div>
-	<div>
-		<label for="password">Password:</label>
-		<input type="password" name="password" value="" required>
-	</div>
-	<div>
-		<input type="submit" value="Login">
-	</div>
-</form>
+</div>

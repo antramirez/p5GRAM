@@ -6,15 +6,16 @@
     <title>p5Gram</title>
   </head>
   <body>
-    <h1>p5Gram</h1>
     {{#if user}}
-    <p>Welcome, {{user.username}}</p>
-    <a href="/create">Create sketch</a>
-    <a href="/add">Upload image</a>
-    <a href="/settings">Manage account</a>
-    {{else}}
-    <a href="/register">Register</a>
-    <a href="/login">Login</a>
+    <div class="header-left">
+      <p>Welcome, {{user.firstName}} {{user.lastName}}</p>
+    </div>
+    <div class="header-right">
+      <a href="/{{user.username}}/sketches">My sketches</a><br>
+      <a href="/create">Create sketch</a><br>
+      <a href="/add">Upload sketch</a><br>
+      <a href="/settings">Manage account</a>
+    </div>
     {{/if}}
     {{{body}}}
   </body>

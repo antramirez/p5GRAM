@@ -1,19 +1,164 @@
+$pink: #ffbfcb;
+$orange: rgb(255,200,140);
+
 body {
   background-color: aliceblue;
   font-family: sans-serif;
 }
 
+header {
+  text-align: center;
+  h1 {
+    font-size: 120px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+  }
+}
+
+p {
+  line-height: 1.5em;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.header-left {
+  position: fixed;
+  left: 10px;
+  top: 10px;
+
+  p {
+    display: inline;
+  }
+}
+.header-right {
+  position: fixed;
+  right: 10px;
+  top: 10px;
+  text-align: right;
+  a {
+    text-decoration: none;
+    color: red;
+    transition: color .4s ease;
+  }
+
+  a:hover {
+    color: blue;
+  }
+}
+
+.home-container {
+  display: block;
+  margin: auto;
+  width: 800px;
+  height: 250px;
+
+  h1 {
+    font-size: 100px;
+    font-weight: 700;
+  }
+
+  .home-block {
+    width: 50%;
+    height: 100%;
+    padding-top: 150px;
+    display: inline-block;
+    text-align: center;
+
+    a {
+      font-size: 72px;
+      text-decoration: none;
+      color: white;
+    }
+  }
+
+  .home-block:hover {
+    a{
+      color:black;
+    }
+  }
+
+  #register {
+    background-color: $pink;
+    float: left;
+  }
+
+  #login {
+    background-color: $orange;
+  }
+
+  #register:hover, #login:hover {
+    background-color: white;
+  }
+}
+
+label {
+  display: block;
+}
+
+.form-div {
+  width: 500px;
+  margin: auto;
+  text-align: left;
+
+  h2 {
+    font-size: 56px;
+    text-align: center;
+  }
+
+  label {
+    margin-top: 10px;
+    font-size: 24px;
+  }
+
+  .form-text {
+    height: 50px;
+    width: 100%;
+    font-size: 40px;
+    margin-bottom: 15px;
+  }
+
+  .form-text:focus {
+    background-color: $pink;
+  }
+
+  .form-submit {
+    font-size: 24px;
+    display:block;
+    width: 120px;
+    height: 40px;
+    border: 1px solid $pink;
+  }
+}
+
+.user-not-found {
+  margin: 120px auto;
+  text-align: center;
+  font-size: 50px;
+}
+
 .images {
   width: 1200px;
-  display: flex;
-  justify-content: space-between;
+  margin: auto;
+  margin-top: 100px;
+  text-align: center;
+
+  h1 {
+    font-size: 70px;
+  }
 }
+
 .image-container {
   width: 350px;
-  margin-bottom: 50px;
+  height: 350px;
+  float: left;
+  margin: 30px 15px 50px 15px;
+
   h2 {
     margin-top: 5px;
   }
+
   img {
     width: 100%;
   }
@@ -22,14 +167,15 @@ body {
 .container {
   width: 800px;
   margin: auto;
+
+  p {
+    font-size: 24px;
+  }
 }
+
 #canvas-container {
   canvas {
     margin: 50px auto 30px auto;
     display: block;
   }
-}
-
-p {
-  line-height: 1.5em;
 }

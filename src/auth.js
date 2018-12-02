@@ -110,36 +110,20 @@ function startAuthenticatedSession(req, user, cb) {
   cb();
 }
 
-function updateUser(firstName, lastName, username, errorCallback, successCallback) {
+function updateUser(firstName, lastName, errorCallback, successCallback) {
   // validate potentially updated first name, last name, and username
   if (firstName.length < 1) {
     const errObj = {message: 'FIRST NAME TOO SHORT'};
     console.log(errObj.message);
     errorCallback(errObj);
   }
-  if (lastName.length < 1) {
+  else if (lastName.length < 1) {
     const errObj = {message: 'LAST NAME TOO SHORT'};
     console.log(errObj.message);
     errorCallback(errObj);
   }
-  if (username.length < 8) {
-    const errObj = {message: 'USERNAME TOO SHORT'};
-    console.log(errObj.message);
-    errorCallback(errObj);
-  }
   else {
-    // check if valid username already exists
-    User.findOne({username: username}, (err, user, count) => {
-      if (!user) {
-        // success call back will update the user in the db
-        successCallback();
-      }
-      else {
-        const errObj = {message: 'USERNAME ALREADY EXISTS'};
-        console.log(errObj.message);
-        errorCallback(errObj);
-      }
-    });
+    successCallback()
   }
 }
 

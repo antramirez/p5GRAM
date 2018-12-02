@@ -2,14 +2,111 @@ body {
   background-color: aliceblue;
   font-family: sans-serif; }
 
+header {
+  text-align: center; }
+  header h1 {
+    font-size: 120px;
+    margin-top: 20px;
+    margin-bottom: 40px; }
+
+p {
+  line-height: 1.5em; }
+
+.align-right {
+  text-align: right; }
+
+.header-left {
+  position: fixed;
+  left: 10px;
+  top: 10px; }
+  .header-left p {
+    display: inline; }
+
+.header-right {
+  position: fixed;
+  right: 10px;
+  top: 10px;
+  text-align: right; }
+  .header-right a {
+    text-decoration: none;
+    color: red;
+    transition: color .4s ease; }
+  .header-right a:hover {
+    color: blue; }
+
+.home-container {
+  display: block;
+  margin: auto;
+  width: 800px;
+  height: 250px; }
+  .home-container h1 {
+    font-size: 100px;
+    font-weight: 700; }
+  .home-container .home-block {
+    width: 50%;
+    height: 100%;
+    padding-top: 150px;
+    display: inline-block;
+    text-align: center; }
+    .home-container .home-block a {
+      font-size: 72px;
+      text-decoration: none;
+      color: white; }
+  .home-container .home-block:hover a {
+    color: black; }
+  .home-container #register {
+    background-color: #ffbfcb;
+    float: left; }
+  .home-container #login {
+    background-color: #ffc88c; }
+  .home-container #register:hover, .home-container #login:hover {
+    background-color: white; }
+
+label {
+  display: block; }
+
+.form-div {
+  width: 500px;
+  margin: auto;
+  text-align: left; }
+  .form-div h2 {
+    font-size: 56px;
+    text-align: center; }
+  .form-div label {
+    margin-top: 10px;
+    font-size: 24px; }
+  .form-div .form-text {
+    height: 50px;
+    width: 100%;
+    font-size: 40px;
+    margin-bottom: 15px; }
+  .form-div .form-text:focus {
+    background-color: #ffbfcb; }
+  .form-div .form-submit {
+    font-size: 24px;
+    display: block;
+    width: 120px;
+    height: 40px;
+    border: 1px solid #ffbfcb; }
+
+.user-not-found {
+  margin: 120px auto;
+  text-align: center;
+  font-size: 50px; }
+
 .images {
   width: 1200px;
-  display: flex;
-  justify-content: space-between; }
+  margin: auto;
+  margin-top: 100px;
+  text-align: center; }
+  .images h1 {
+    font-size: 70px; }
 
 .image-container {
   width: 350px;
-  margin-bottom: 50px; }
+  height: 350px;
+  float: left;
+  margin: 30px 15px 50px 15px; }
   .image-container h2 {
     margin-top: 5px; }
   .image-container img {
@@ -18,10 +115,9 @@ body {
 .container {
   width: 800px;
   margin: auto; }
+  .container p {
+    font-size: 24px; }
 
 #canvas-container canvas {
   margin: 50px auto 30px auto;
   display: block; }
-
-p {
-  line-height: 1.5em; }

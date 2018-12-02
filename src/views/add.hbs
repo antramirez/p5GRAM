@@ -1,10 +1,21 @@
+<header>
+	<h1>p5GRAM</h1>
+</header>
+
 {{#if message}}
   <div class="error">{{ message }}</div>
 {{/if}}
-<form method="post" enctype="multipart/form-data" action="/add">
-    Image: <input type="file" name="file" required><br>
-    Title: <input type="text" name="name" value="" required><br>
-    Caption: <input type="textarea" name="caption" value=""><br>
-    Tags: <input type="text" name="tags" placeholder="Separate tags by space"><br>
-    <input type="submit" value="Submit">
-</form>
+<div class="form-div">
+  <form method="post" enctype="multipart/form-data" action="/add">
+      <label for="file">Image</label>
+      <input type="file" name="file" required><br>
+      <label for="name">Title</label>
+      <input type="text" class="form-text" name="name" value="" required><br>
+      <label for="caption">Caption</label>
+      <input type="textarea" class="form-text" name="caption" value=""><br>
+      <label for="tags">Tags</label>
+      <input type="text" class="form-text" name="tags" placeholder="Separate tags by space"><br>
+      <input type="submit" class="form-submit" value="Submit">
+  </form>
+
+</div>

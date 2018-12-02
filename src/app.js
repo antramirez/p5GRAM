@@ -1,5 +1,3 @@
-// 1st draft of app
-
 // require express and path modules, and make an express app
 const express = require('express');
 // require mongoose module to connect to database
@@ -51,11 +49,23 @@ app.use((req, res, next) => {
 
 // paths
 app.get('/', (req, res) => {
-  res.render('home');
+  // check if user is logged in
+  if (!req.session.user) {
+    res.render('home');
+  }
+  else {
+    res.redirect('/create');
+  }
 });
 
 app.get('/register', (req, res) => {
-  res.render('register');
+  // check if user is logged in
+  if (!req.session.user) {
+    res.render('register');
+  }
+  else {
+    res.redirect('/create');
+  }
 })
 
 app.post('/register', (req, res) => {
@@ -78,7 +88,13 @@ app.post('/register', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-  res.render('login');
+  // check if user is logged in
+  if (!req.session.user) {
+    res.render('login');
+  }
+  else {
+    res.redirect('/create');
+  }
 });
 
 app.post('/login', (req, res) => {
@@ -101,81 +117,40 @@ app.post('/login', (req, res) => {
 })
 
 app.get('/:username/sketches', (req, res) => {
-  // see if username exists
-  User.findOne({username: req.params.username}, (err, user, count) => {
-    if (user) {
-      // now see if user has any sketches
-      Sketch.find({userId: user._id}, (err, sketches, count) => {
-          res.render('user-single', {username: req.params.username, sketches: sketches.reverse()});
-      });
-    }
-    // print message is user does not exist
-    else {
-      res.render('user-single', {message: "USER DOES NOT EXIST"});
-    }
-  });
+  // check if user is logged in
+  if (!req.session.user) {
+    res.render('login');
+  }
+  else {
+    // see if username exists
+    User.findOne({username: req.params.username}, (err, user, count) => {
+      if (user) {
+        // now see if user has any sketches
+        Sketch.find({userId: user._id}, (err, sketches, count) => {
+            res.render('user-single', {username: req.params.username, sketches: sketches.reverse()});
+        });
+      }
+      // print message is user does not exist
+      else {
+        res.render('user-single', {message: "USER DOES NOT EXIST"});
+      }
+    });
+  }
+});
+
+// search for user
+app.post('/:username/sketches', (req, res) => {
+  // send to user page
+  res.redirect('/' + req.body.username + '/sketches')
 });
 
 app.get('/add', (req, res) => {
+  // check if user is logged in
   if (!req.session.user) {
     res.redirect('/login');
   }
   else {
     res.render('add');
-  }
-});
-
-app.get('/create', (req, res) => {
-  if (!req.session.user) {
-    res.redirect('/login');
-  }
-  else {
-    res.render('create');
-  }
-});
-
-app.get('/settings', (req, res) => {
-  if (!req.session.user) {
-    res.redirect('/login');
-  }
-  else {
-    res.render('settings');
-  }
-});
-
-app.post('/settings', (req, res) => {
-  // store original username to be used to compare with updated username
-  const oldUsername = req.session.user.username;
-
-  // call update function
-  auth.updateUser(req.body.firstName, req.body.lastName, req.body.username,
-  (errObj) => {
-    // if there is an error, display message above the form
-    res.render('settings', {message: errObj.message})
-  },
-  () => {
-    User.updateOne({_id: res.locals.user._id},
-      // set new fields
-      {
-        $set: {firstName: req.body.firstName, lastName: req.body.lastName, username: req.body.username}
-      },
-    function(err, result, count) {
-      // set local variables
-      res.locals.user.firstName = req.body.firstName;
-      res.locals.user.lastName = req.body.lastName;
-      res.locals.user.username = req.body.username;
-      // redirect to homepage
-      res.redirect('/');
-    });
-  });
-
-  // rename diretory that contains the user's images
-  if (oldUsername !== req.body.username) {
-    fs.rename(fullPath + '/img/uploads/' + oldUsername, fullPath + '/img/uploads/' + req.body.username, (err) => {
-      if (err) {
-        res.render('settings', {message: "SOMETHING WENT WRONG"})
-      }
-    });
   }
 });
 
@@ -239,6 +214,52 @@ app.post("/add", upload.single("file"), (req, res) => {
     }
   }
 );
+
+app.get('/create', (req, res) => {
+  // check if user is logged in
+  if (!req.session.user) {
+    res.redirect('/login');
+  }
+  else {
+    res.render('create');
+  }
+});
+
+app.get('/settings', (req, res) => {
+  // check if user is logged in
+  if (!req.session.user) {
+    res.redirect('/login');
+  }
+  else {
+    res.render('settings');
+  }
+});
+
+app.post('/settings', (req, res) => {
+  // call update function
+  auth.updateUser(req.body.firstName, req.body.lastName,
+  (errObj) => {
+    // if there is an error, display message above the form
+    res.render('settings', {message: errObj.message})
+  },
+  () => {
+    User.updateOne({_id: res.locals.user._id},
+      // set new fields
+      {
+        $set: {firstName: req.body.firstName, lastName: req.body.lastName}
+      },
+    function(err, result, count) {
+      // set local variables
+      res.locals.user.firstName = req.body.firstName;
+      res.locals.user.lastName = req.body.lastName;
+      // redirect to homepage
+      res.redirect('/create');
+    });
+  });
+});
+
+
+
 
 // listen on node env PORT or port 3000
 app.listen(process.env.PORT || 3000);
