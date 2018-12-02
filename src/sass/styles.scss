@@ -1,13 +1,15 @@
 body {
   background-color: aliceblue;
-
-  h1 {
-    font-family: sans-serif;
-  }
+  font-family: sans-serif;
 }
 
+.images {
+  width: 1200px;
+  display: flex;
+  justify-content: space-between;
+}
 .image-container {
-  width: 200px;
+  width: 350px;
   margin-bottom: 50px;
   h2 {
     margin-top: 5px;
@@ -15,4 +17,19 @@ body {
   img {
     width: 100%;
   }
+}
+
+.container {
+  width: 800px;
+  margin: auto;
+}
+#canvas-container {
+  canvas {
+    margin: 50px auto 30px auto;
+    display: block;
+  }
+}
+
+p {
+  line-height: 1.5em;
 }

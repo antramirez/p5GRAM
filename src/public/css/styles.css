@@ -1,12 +1,27 @@
 body {
-  background-color: aliceblue; }
-  body h1 {
-    font-family: sans-serif; }
+  background-color: aliceblue;
+  font-family: sans-serif; }
+
+.images {
+  width: 1200px;
+  display: flex;
+  justify-content: space-between; }
 
 .image-container {
-  width: 200px;
+  width: 350px;
   margin-bottom: 50px; }
   .image-container h2 {
     margin-top: 5px; }
   .image-container img {
     width: 100%; }
+
+.container {
+  width: 800px;
+  margin: auto; }
+
+#canvas-container canvas {
+  margin: 50px auto 30px auto;
+  display: block; }
+
+p {
+  line-height: 1.5em; }
