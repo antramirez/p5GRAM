@@ -1,7 +1,7 @@
 antramirez   
 Final Project
 
-# p5-Gram (title still in works)
+# p5GRAM
 
 ## Overview
 
@@ -30,7 +30,6 @@ Example sketch:
   caption: "check out my awesome sketch!",
   tags: "p5 webArt cool",
   url: "www.mysite.com/img/username/1.jpg",
-  dateCreated: "Wed Nov 07 2018 22:01:19 GMT-0500",
   userID: // ObjectId of user
 }
 ````
