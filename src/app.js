@@ -119,7 +119,7 @@ app.post('/login', (req, res) => {
 app.get('/:username/sketches', (req, res) => {
   // check if user is logged in
   if (!req.session.user) {
-    res.render('login');
+    res.redirect('/login');
   }
   else {
     // see if username exists
